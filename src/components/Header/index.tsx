@@ -8,7 +8,7 @@ type THeaderProps = {
   openModal: () => void;
 }
 
-export default function Header({ openModal }:THeaderProps){
+const Header = ({ openModal }:THeaderProps) => {
 
   return (
     <Container>
@@ -31,3 +31,5 @@ export default function Header({ openModal }:THeaderProps){
     </Container>
   )
 }
+
+export default Header;
