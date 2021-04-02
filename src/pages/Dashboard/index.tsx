@@ -28,7 +28,7 @@ const Dashboard = () =>{
   const [foods, setFoods] = useState<TFood[]>([])
   const [editingFood, setEditingFood] = useState<TFood>({} as TFood)
   const [modalOpen, setModalOpen] = useState(Boolean)
-  const [editModalOpen, seteditModalOpen] = useState(Boolean)
+  const [editModalOpen, setEditModalOpen] = useState(Boolean)
 
   useEffect( () => {
     const fetchData = async () => {
@@ -38,7 +38,7 @@ const Dashboard = () =>{
     fetchData()
   }, [])
 
-  const handleAddFood = async (food:TFormProps) => {
+  const handleAddFood = async (food:TFormProps): Promise<void> => {
     try {
       const response = await api.post('/foods', {
         ...food,
@@ -50,7 +50,7 @@ const Dashboard = () =>{
     }
   }
   
-  const handleUpdateFood = async (food: TFormProps) => {
+  const handleUpdateFood = async (food: TFormProps): Promise<void> => {
     try {
       const foodUpdated = await api.put(
         `/foods/${editingFood.id}`,
@@ -67,7 +67,7 @@ const Dashboard = () =>{
     }
   }  
 
-  const handleDeleteFood = async (id: number) => {
+  const handleDeleteFood = async (id: number): Promise<void> => {
     await api.delete(`/foods/${id}`);
 
     const foodsFiltered:TFood[] = foods.filter(food => food.id !== id);
@@ -80,12 +80,12 @@ const Dashboard = () =>{
   } 
   
   const toggleEditModal = () => {
-    seteditModalOpen(!editModalOpen)
+    setEditModalOpen(!editModalOpen)
   }  
 
   const handleEditFood = (food: TFood) => {
     setEditingFood(food)
-    setModalOpen(true)
+    setEditModalOpen(true)
   }  
 
   return (
